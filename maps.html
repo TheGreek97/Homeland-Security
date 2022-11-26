@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Homeland Security | Games</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="css/cover.css" rel="stylesheet" type="text/css">
+    <script>
+        function SoundrIntro(){
+            var audio  = new Audio('/sounds/intro.mp3');
+            audio.load();
+            audio.play();
+        }
+
+    </script>
+</head>
+
+<body class="d-flex h-100 text-center text-black bg-dark">
+
+<div class="d-flex w-100 h-100 flex-column">
+    <!-- Navbar -->
+    <header class="mb-auto p-3">
+        <nav class="nav nav-masthead">
+            <a class="nav-link mx-3" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link" href="maps.html" id="navbarGames" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
+        </nav>
+    </header>
+    <main>
+        <div class="playground">
+            <div class="h2 py-4 text-white">Choose between these 3 mini games</div>
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
+                    <div class="col p-3">
+                        <div class="card shadow-sm game-card">
+                            <div class="row">
+                                <div class="col-12 cover-image-cell">
+                                    <img src="img/cctv.png" class="card-img-top cover-image p-3" alt="camera image">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card-body">
+                                        <p class="card-text">Understand how to correctly install security cameras (CCTV) in a home environment</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group mx-auto">
+                                                <a onclick="SoundrIntro()"  href="cctv.html" class="btn btn-outline-secondary">PLAY</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col p-3">
+                        <div class="card shadow-sm game-card">
+                            <div class="row">
+                                <div class="col-12 cover-image-cell">
+                                    <img src="img/router.png" class="card-img-top cover-image p-3" alt="router image">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card-body">
+                                        <p class="card-text">Understand how to correctly set up your router to achieve maximum security</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group mx-auto">
+                                                <a onclick="SoundrIntro()"  href="router.html" class="btn btn-outline-secondary">PLAY</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col p-3">
+                        <div class="card shadow-sm game-card">
+                            <div class="row">
+                                <div class="col-12 cover-image-cell">
+                                    <img src="img/call.png" class="card-img-top cover-image p-3" alt="phone call image">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card-body">
+                                        <p class="card-text">Understand if some criminal wants to scam you in telephone calls</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div  class="btn-group mx-auto">
+                                                <a onclick="SoundrIntro()" href="call.html" class="btn btn-outline-secondary">PLAY</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-auto text-white-50">
+        <p>A serious game developed by Francesco Greco and Francesco Plantone <a href="https://github.com/Holtalca/Serius_Game" class="text-white">GIT</a></p>
+    </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Router level Easy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/sounds.js"></script>
+    <script>$(document).ready(function () {
+        resetForms();
+    });
+
+    function resetForms() {
+        for (i = 0; i < document.forms.length; i++) {
+            document.forms[i].reset();
+        }
+    }
+    </script>
+    <link href="../css/cover.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+<div class="d-flex w-100 h-100 mx-auto flex-column">
+    <header class="mb-auto p-3">
+        <nav class="p-0 nav nav-masthead navbar navbar-expand-xxxl container-fluid">
+            <span>
+                <a class="d-inline nav-link mx-3" href="#" onclick="SoundClick()" data-bs-toggle="modal" data-bs-target="#homeModal" data-bs-whatever="@mdo">Home</a>
+                <span class="d-inline">
+                    <a class="nav-link d-inline" href="#" onclick="SoundClick()" data-bs-toggle="modal" data-bs-target="#mapModal" data-bs-whatever="@mdo">Games</a>
+                    <span class="mx-2"> > </span>
+                    <a class="nav-link d-inline" href="#" onclick="SoundClick()" data-bs-toggle="modal" data-bs-target="#levelsModal" data-bs-whatever="@mdo">Levels</a>
+                </span>
+            </span>
+            <span>
+                <button class="btn btn-primary" onclick="SoundClick()" data-bs-toggle="modal" data-bs-target="#startModal" data-bs-whatever="@mdo"> Scenery</button>
+                <button class="btn btn-success" style="margin-left: 10px" onclick="SoundClick()" data-bs-toggle="modal" data-bs-target="#helpModal" data-bs-whatever="@mdo"> Help</button>
+            </span>
+        </nav>
+    </header>
+    <main class="container mt-5">
+        <div class="row g-5">
+            <div class="pt-4 col-12 playground">
+                <h4 class="mb-3">General Settings</h4>
+                <form class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <label for="netname" class="form-label" >Network name</label>
+                            <input type="email" class="form-control" id="netname" placeholder="Insert a name for the network..." required>
+                        </div>
+                        <div class="col-6">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" placeholder="Insert a password..." maxlength="15" required>
+                                <span class="input-group-text">
+                                    <input class="form-check-input" type="checkbox" value="" onclick="togglePasswordField()" id="flexCheckDefault">
+                                      <label class="form-check-label" for="flexCheckDefault">&nbsp; Show
+                                      </label>
+                                </span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please enter a strong password.
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="nhosts" class="form-check-label" >
+                                Max. Hosts Number
+                            </label>
+                            <input type="number" class="form-control" id="nhosts" pattern="[0-9]$" min="0" max="254" placeholder="[0-254]" value="" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="ssid" class="form-label">Hide Network Name (SSID)</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="form-check-input custom-control-input" id="ssid" value="">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="pinrouter" class="form-label">Router PIN </label>
+                            <input type="text" class="form-control" id="pinrouter" placeholder="Insert an alphanumeric PIN..." required>
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="signal" class="form-label">Signal Power level</label>
+                            <select class="form-select" id="signal" required>
+                                <option value="null">Choose...</option>
+                                <option value="low">Low</option>
+                                <option value="middle">Medium</option>
+                                <option value="high">Strong</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="col-12">
+                    <button id="done" class="w-50 my-4 btn btn-primary btn-md" onclick="calculateResults()" type="button" data-bs-toggle="modal" data-bs-target="#resultsModal">Done</button>
+                </div>
+            </div>
+
+        </div>
+        <!-- Help Modal -->
+        <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title modal-text" id="helpModalLabel">Help</h5>
+                    </div>
+                    <div class="modal-body modal-text">
+                        <div>
+                            <img class="d-block mx-auto mb-4" src="/img/question.jpg" alt="" width="72" height="57">
+                            <p class="lead modal-text"> <pre>Network Name: it is the name that is displayed when you discover a Wi-Fi network</pre>
+                            <pre>Password: it is the password of Wi-Fi network; so, be careful to not choose a poor password.</pre>
+                            <pre>Max Hosts Number: it is the number of possible devices that can be connected on the network; no more than this number of devices is allowed</pre>
+                            <pre>Hide SSID: it is the possibility to hide the name of the Wi-Fi network; if selected, only the owner who knows the name can find this network.</pre>
+                            <pre>Router PIN: it is the PIN that is required to reset the router; a reset like this wipes all the existing router security settings (the default settings are activated).</pre>
+                            <pre>Signal Power Level: it is the power level of the Wi-Fi signal.</pre> <pre>Low -> Wi-Fi is reachable within 15m</pre><pre>Mid -> Wi-Fi is reachable within 25m</pre><pre>High -> Wi-Fi is reachable within 35m</pre></pre>
+                            <p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Start Modal -->
+        <div class="modal fade" id="startModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title modal-text" id="startModalLabel">Scenery</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <img class="d-block mx-auto mb-4" src="router.png" alt="" width="72" height="57">
+                            <p class="lead modal-text">You are inside <i>O'Brian</i> house, which comprises 4 people in the household. Each of them has 2 personal devices; then, there is a smart TV and 6 other smart devices.
+                                They don't usually receive guests. The house is placed inside a condominium in the middle of the city.
+                                Around the house there are a lot of offices that are frequently attacked by hackers. So, take good decisions: choose the best settings to protect this family from the hackers!<p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Results Modal -->
+        <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title modal-text" id="resultsModalLabel">Results</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                           <p class="lead modal-text" id="resultsText"> <p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  type="button" class="btn btn-warning" data-bs-dismiss="modal"><a onClick="window.location.reload()">Try again</a></button>
+                        <button type="button" class="btn btn-primary"  onclick="window.location.href='/router/router_l2.html'">Next level</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- map modal -->
+        <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title modal-text" id="exitModalLabel">Go back to the Mini Games Choice?</h5>
+                    </div>
+                    <div class="modal-body modal-text">
+                        <div>
+                            <pre>Are you sure to exit from the game?</pre>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-danger" onclick="window.location.href='../maps.html'">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- levels modal -->
+        <div class="modal fade" id="levelsModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title modal-text" id="levelsModalLabel">Go back to the Levels Choice?</h5>
+                    </div>
+                    <div class="modal-body modal-text">
+                        <div>
+                            <pre>Are you sure to exit from the game?</pre>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-danger" onclick="window.location.href='../router.html'">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Home modal -->
+        <div class="modal fade" id="homeModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title modal-text" id="homeModalLabel">Go Back to the Home?</h5>
+                    </div>
+                    <div class="modal-body modal-text">
+                        <div>
+                            <pre>Are you sure to exit from the game?</pre>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-danger" onclick="window.location.href='../index.html'">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="fixed-bottom footer mt-auto text-white-50">
+        <p>A serious game developed by Francesco Greco and Francesco Plantone <a href="https://github.com/Holtalca/Serius_Game" class="text-white">GIT</a></p>
+    </footer>
+
+    <script>
+        let myModal = new bootstrap.Modal(document.getElementById('startModal'), [])
+        myModal.show()
+
+        function togglePasswordField () {
+            let x = document.getElementById("password");
+            x.type = x.type === "password" ? "text" : "password";
+        }
+        
+        function CheckPassword(pwd){
+            //To check a password with at least 8 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character
+            let strong=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/; //aA1dd422$
+            // min 8 10 letter password, with at least a symbol, upper and lower case letters and a number
+            let mid = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,8}$/; //aA1qw@3
+            //  more than 4 characters which contain at least one numeric digit, one lowercase letter
+            let low= /^[a-z0-9].{4,}$/;  //a12342
+            let result=[];
+            if (pwd === "") {
+                result[0]="You haven't inserted a password!"
+                result[1]=0
+            } else if(pwd.match(strong)){
+                result[0] = "You chose a very strong password!";
+                result[1]=2;
+            } else if(pwd.match(mid)){
+                result[0] = "You chose a good password. <br> Improve it by inserting at least 8 characters and include letters, numbers and symbols";
+                result[1]=1;
+            } else if (pwd.match(low)){
+                result[1]=0.5;
+                result[0] = "You chose a weak password... <br> Insert more characters, choosing between lowercase and uppercase letters, numbers and symbols"
+            } else {
+                result[0] = "The password doesn't respect the standards: <br>Insert a minimum of 5 characters, including at least one digit and one lowercase letter"
+                result[1]=0;
+            }
+            return result;
+        }
+
+        function CheckPin(pin){
+            //To check a password between 8 to 15 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character
+            var strong=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/; //aA1dd422$
+            // min 8 10 letter password, with at least a symbol, upper and lower case letters and a number
+            var mid = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,8}$/; //aA1qw@3
+            //  more than 4 characters which contain at least one numeric digit, one lowercase letter
+            var low= /^[a-z0-9].{4,}$/;  //a12342
+            let result=[];
+            if (pin === "") {
+                result[0]="You haven't inserted a PIN!"
+                result[1]=0
+            } else if(pin.match(strong))
+            {
+                result[0] = "You chose a very strong PIN!";
+                result[1]=2;
+            } else if(pin.match(mid)){
+                result[0] = "You chose a good PIN. <br> Improve it by inserting at least 8 characters and include letters, numbers and symbols";
+                result[1]=1;
+            } else if (pin.match(low)){
+                result[0] = "You chose a weak PIN... <br> Insert more characters, choosing between lowercase and uppercase letters, numbers and symbols";
+                result[1]=0.5;
+            } else {
+                result[0] = "The PIN doesn't respect the standards: <br>Insert a minimum of 5 characters, including at least one digit and one lowercase letter"
+                result[1]=0
+            }
+            return result;
+        }
+
+        function CheckSignal(signal) {
+            let result=[];
+            result[0]="You haven't chose anything";
+            result[1]=0;
+            if(signal === "null"){
+                result[0] = "You haven't set a signal power level"
+                result[1] = 0;
+                return result;
+            }
+            if(signal === "low"){
+                result[0] = "Good choice, in this way the Wi-Fi signal will only be discoverable in your house"
+                result[1] = 1.5;
+                return result;
+            }
+            if (signal === "middle"){
+                result[0] = "In this way the Wi-Fi is also discoverable by your neighbours..."
+                result[1] = 1;
+                return result;
+
+            }
+            if(signal === "high"){
+                result[0] = "In this way your Wi-Fi is also discoverable from people outside your building!"
+                result[1] = 0.5;
+                return result;
+            }
+        }
+
+        function CheckHost(numhost){
+            let result=[];
+            result[0]="You haven't chose a maximum number for the hosts";
+            result[1]=0;
+            if (numhost > 15){
+                result[0]= "This gives the possibility to connect more devices than necessary, giving the possibility for an hacker to enter inside your network!"
+                result[1] = 0;
+            } else if(numhost === 15){
+                result[0]= "Good choice, this blocks any additions of external devices to your network"
+                result[1] = 1;
+            } else if (numhost >= 1 ){
+                result[0]= "This allows you to only connect your personal device and few other smart devices"
+                result[1] = 0.5;
+            } else if(numhost <= 0){
+                result[0]= "In this way nobody can use the network!"
+                result[1] = 0;
+            }
+            return result;
+        }
+
+        function CheckSsid(ss){
+            let result=[];
+            if(ss){
+                result[0]= "Good job! In this way, you will hide your network, so that its name is not directly discoverable"
+                result[1] = 0.5;
+                return result;
+            }
+            else{
+                result[0]= "In this way anybody can find your network!"
+                result[1] = 0;
+                return result;
+
+            }
+        }
+
+        function SoundClick(){
+            let audio  = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/click.mp3');
+            let audio2 = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/clickUp.mp3')
+            audio2.load();
+            audio2.play();
+            audio.load();
+            audio.play();
+        }
+        function Soundresults(victory){
+            let audio  = victory ? new Audio('/sounds/rullo.mp3') : new Audio ('/sounds/lost_bebeps.wav');
+            audio.load();
+            audio.play();
+        }
+
+        let calculateResults = function () {
+            SoundClick();
+            let score = 0;
+
+            let netname = $("#netname").val();
+
+            let password = $("#password").val();
+            let password_score = [" ",0];
+
+            let nhost = $("#nhosts").val();
+            let nhost_score = [" ",0];
+
+            let ssid = $('#ssid').is(':checked');
+            let ssid_score = [" ",0];
+
+            let pinrouter = $("#pinrouter").val();
+            let pin_score = [" ",0];
+
+            let signal = $("#signal").val();
+            let signal_score = [" ",0];
+            let name = "o'brian";
+            let name_1 = "obrian";
+
+            //******************************************
+
+            let vuoto = netname.localeCompare("");
+            if(vuoto !== 0){
+                if ((netname.toUpperCase() !== name.toUpperCase()) && (netname.toUpperCase() !== name_1.toUpperCase())) {
+                    score += 1;
+                    netname ="(Good! You didn't leak any personal information)";
+                    console.log("name good")
+                }
+            } else{
+                netname ="(The network doesn't have a name!)";
+            }
+
+            password_score = CheckPassword(password);
+            score += password_score[1];
+
+            nhost_score = CheckHost(nhost);
+            score += nhost_score[1];
+
+            ssid_score = CheckSsid(ssid);
+            score += ssid_score[1];
+
+            pin_score = CheckPin(pinrouter);
+            score += pin_score[1];
+
+            signal_score = CheckSignal(signal);
+            score += signal_score[1];
+
+
+            let txt_color;
+            let grade;
+            if (score >= 8) {
+                //A
+                grade = "A";
+                txt_color = "darkgreen";
+            } else if (score >= 7) {
+                //B+
+                txt_color = "green";
+                grade = "B+";
+            } else if (score >= 6) {
+                //B
+                txt_color = "green";
+                grade = "B";
+            } else if (score >= 4.5) {
+                //C
+                txt_color = "goldenrod";
+                grade = "C";
+            } else if (score >= 3) {
+                //D
+                txt_color = "orange"
+                grade = "D";
+            } else if (score >= 1.5) {
+                //D-
+                txt_color = "darkorange"
+                grade = "D-";
+            } else {
+                //F
+                txt_color = "darkred"
+                grade = "F";
+            }
+            Soundresults(score >= 6);
+
+            $("#resultsText").html(`
+            <div>
+               <pre><h3><br>Your score is <span style="color:${txt_color}">${grade}</span></br><h3></pre>
+               <hr>
+               <pre class="pb-0">Chosen Network name: <br>${netname}</br></pre>
+
+               <pre>Password score:  <span style="color:${password_score[1]>=2 ? "darkgreen" : (password_score[1]>=1 ? "goldenrod":"darkred")}">${password_score[1]}/2</span>
+               <br><span class="">(${password_score[0]})</span></br></pre>
+
+               <pre>Number of Hosts score: <span style="color:${nhost_score[1]>=1 ? "darkgreen" : (nhost_score[1]===0.5 ? "goldenrod":"darkred")}">${nhost_score[1]}/1</span>
+               <br>(${nhost_score[0]})</br></pre>
+
+               <pre>SSID score:  <span style="color:${ssid_score[1]>=0.5 ? "darkgreen" : "darkred"}">${ssid_score[1]}/0.5 </span>
+               <br>(${ssid_score[0]})</br></pre>
+
+               <pre> Router PIN score: <span style="color:${pin_score[1]>=2 ? "darkgreen" : (pin_score[1]>=1 ? "goldenrod":"darkred")}">${pin_score[1]}/2</span>
+               <br>(${pin_score[0]})</br></pre>
+
+               <pre> Signal Level score: <span style="color:${signal_score[1]>=1.5 ? "darkgreen" : (signal_score[1]>=1 ? "goldenrod":"darkred")}"> ${signal_score[1]}/1.5</span>
+               <br>(${signal_score[0]})</br></pre>
+            </div>
+            `)
+        }
+    </script>
+</div>
+</body>
+
+</html>

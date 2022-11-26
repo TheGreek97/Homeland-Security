@@ -1,0 +1,155 @@
+/*
+ * Globals
+ */
+
+@font-face {
+  font-family: liberationSans;
+  src: url(Fonts/LiberationSans.ttf);
+}
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+}
+
+
+/*
+ * Base structure
+ */
+
+body {
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  font-family: liberationSans, serif;
+}
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+/*
+ * Header
+ */
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+.item1 {
+  grid-column: 1 / 5;
+}
+
+.cover-image {
+  max-height: 280px;
+  max-width: 280px;
+  align-self: center;
+}
+
+.modal-text {
+  color: black;
+}
+
+.playground{
+  background-color: #1d2025 ;
+}
+
+.colored-container{
+  background-color: rgb(34 38 41);
+  max-width:80%;
+  border-radius:7%;
+}
+
+
+.game-card {
+  height:430px;
+}
+
+.btn-level-sel{
+  width: 12rem;
+}
+
+.btn-easy {
+  background-color: #3E680D;
+  color: #F8FA7A;
+  box-shadow: none !important;
+  font-weight: bolder;
+  padding: 1rem 3rem !important;
+}
+.btn-easy:hover {
+  background-color: rgba(95, 100, 90, 0.1);
+  color: #F8FA7A;
+}
+.btn-easy:active, .btn-easy:active:focus {
+  background-color: rgba(95, 100, 90, 0.1);
+  outline: none!important;
+  color: #F8FA7A;
+}
+
+.btn-advanced {
+  background-color: #3E680D;
+  color: #E7A149;
+  box-shadow: none !important;
+  font-weight: bolder;
+  padding: 1rem 3rem !important;
+}
+.btn-advanced:hover {
+  background-color: rgba(95, 100, 90, 0.1);
+  color: #E7A149;
+}
+.btn-advanced:active, .btn-advanced:active:focus {
+  background-color: rgba(95, 100, 90, 0.1);
+  outline: none !important;
+  color: #E7A149;
+}
+
+.w-70 {
+  width : 70%;
+}
+
+pre {
+  overflow: hidden;
+  white-space: unset;
+  margin-bottom: 1.2rem;
+  font-family: liberationSans, serif !important;
+}
+
+.footer {
+  padding-top: 10px;
+  background-color: rgb(34 38 41);
+}

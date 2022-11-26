@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Call Security</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="css/cover.css" rel="stylesheet" type="text/css">
+    <script>
+        function SoundClick(){
+            var audio  = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/click.mp3');
+            var audio2 = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/clickUp.mp3')
+            audio2.load();
+            audio2.play();
+            audio.load();
+            audio.play();
+        }
+    </script>
+</head>
+
+
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+
+<div class="d-flex w-100 h-100 mx-auto flex-column">
+    <!-- Navbar -->
+    <header class="mb-auto p-3">
+        <nav class="nav nav-masthead">
+            <a class="nav-link mx-3" onclick="SoundClick()" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link" onclick="SoundClick()" href="maps.html" id="navbarGames" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
+        </nav>
+    </header>
+
+    <main class="mx-auto w-70">
+    <div class="py-4 playground">
+            <div class="h2 py-4 text-white">Select a Difficulty Level</div>
+            <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column ">
+                <div class="row row-cols-1 row-cols-sm-2  ">
+                    <div class="col mb-3">
+                        <div class="btn-group btn-level-sel">
+                            <a onclick="SoundClick()" href="call/call_l1.html" class="btn btn-easy">EASY</a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="btn-group btn-level-sel">
+                            <a onclick="SoundClick()" href="call/call_l2.html" class="btn btn-advanced">ADVANCED</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-auto text-white-50">
+        <p>A serious game developed by Francesco Greco and Francesco Plantone <a href="https://github.com/Holtalca/Serius_Game" class="text-white">GIT</a></p>
+    </footer>
+</div>
+</body>
+</html>

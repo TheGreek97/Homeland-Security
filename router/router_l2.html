@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Router level Middle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script >$(document).ready(function () {
+        resetForms();
+    });
+
+    function resetForms() {
+        for (let i = 0; i < document.forms.length; i++) {
+            document.forms[i].reset();
+        }
+    }</script>
+    <link href="../css/cover.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+<div class="d-flex w-100 h-100 mx-auto flex-column">
+    <header class="mb-auto p-3">
+        <nav class="p-0 nav nav-masthead navbar navbar-expand-xxxl container-fluid">
+            <span>
+                <a class="d-inline nav-link mx-3" href="#" onclick="SoundClick()" data-bs-toggle="modal" data-bs-target="#homeModal" data-bs-whatever="@mdo">Home</a>
+                <span class="d-inline">
+                    <a class="nav-link d-inline" href="#" onclick="SoundClick()" data-bs-toggle="modal" data-bs-target="#mapModal" data-bs-whatever="@mdo">Games</a>
+                    <span class="mx-2"> > </span>
+                    <a class="nav-link d-inline" href="#" onclick="SoundClick()" data-bs-toggle="modal" data-bs-target="#levelsModal" data-bs-whatever="@mdo">Levels</a>
+                </span>
+            </span>
+            <span>
+                <button class="btn btn-primary" onclick="SoundClick()" data-bs-toggle="modal" data-bs-target="#startModal" data-bs-whatever="@mdo"> Scenery</button>
+                <button class="btn btn-success" style="margin-left: 10px" onclick="SoundClick()" data-bs-toggle="modal" data-bs-target="#helpModal" data-bs-whatever="@mdo"> Help</button>
+            </span>
+        </nav>
+    </header>
+
+    <div class="container mt-5">
+        <main>
+            <div class="row g-5">
+                <div class="col-12 pt-4 playground">
+                    <h4 class="mb-3">Security Settings</h4>
+                    <form class="needs-validation" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label for="firewall" class="form-label">Active firewall SPI </label>
+                                <input class="form-check-input" type="checkbox" id="firewall" >
+                            </div>
+                            <div class="col-md-3">
+                                <label for="wps" class="form-label">WPS</label>
+                                <input class="form-check-input" type="checkbox" id="wps" >
+                            </div>
+                            <div class="col-md-3">
+                                <label for="ddos" class="form-label">DDOS Protection</label>
+                                <input class="form-check-input" type="checkbox" id="ddos" >
+                            </div>
+                            <div class="col-md-3">
+                                <label for="icmp" class="form-label">ICMP block</label>
+                                <input class="form-check-input" type="checkbox" id="icmp" >
+                            </div>
+                            <div class="col-md-12" >
+                                <div class="colored-container m-auto py-3">
+                                    <label  class="h4 form-label">Blocked Ports:</label>
+                                    <br>
+                                    <div class="form-check form-check-inline form-switch">
+                                        <input class="form-check-input" name="ports" value="21" type="checkbox" id="port_21">
+                                        <label class="form-check-label" for="port_21">21</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-switch">
+                                        <input class="form-check-input" name="ports" value="143" type="checkbox" id="port_143">
+                                        <label class="form-check-label" for="port_143">143</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-switch">
+                                        <input class="form-check-input" name="ports" value="80" type="checkbox" id="port_80">
+                                        <label class="form-check-label" for="port_80">80</label>
+                                    </div>
+                                    <br>
+                                    <div class="form-check-inline form-switch">
+                                        <input class="form-check-input" name="ports" value="118" type="checkbox" id="port_118">
+                                        <label class="form-check-label" for="port_118">118</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-switch">
+                                        <input class="form-check-input" name="ports" value="22" type="checkbox" id="port_22">
+                                        <label class="form-check-label" for="port_22">22</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-switch">
+                                        <input class="form-check-input" name="ports" value="443" type="checkbox" id="port_443">
+                                        <label class="form-check-label" for="port_443">443</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Devices online</label>
+                                <table class="table table-striped" bgcolor="#f0f8ff">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Device name</th>
+                                        <th scope="col">MAC address</th>
+                                        <th scope="col">Action on the hosts</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="devices_table">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12">
+                                <label  class="form-label">Blacklist</label>
+                                <table class="table table-striped" bgcolor="#f0f8ff">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Device name</th>
+                                        <th scope="col">MAC address</th>
+                                        <th scope="col">Modify</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="blacklist_table">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <button class="w-50 my-4 btn btn-primary btn-md" onclick="calculateResults()" type="button" data-bs-toggle="modal" data-bs-target="#resultsModal">Done</button>
+                        <div style='margin-top:50px;'></div>
+                    </form>
+                </div>
+            </div>
+            <!-- Start Modal -->
+            <div class="modal fade" id="startModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title modal-text" id="startModalLabel">Scenery</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <img class="d-block mx-auto mb-4" src="router.png" alt="" width="72" height="57">
+                                <p class="lead modal-text">Oh oh! There are so many devices inside your network, and they aren't yours. Put them out of your network: activate a Firewall and use the blacklist to ban devices.
+                                    Also, there are a lot of attacks on the port 21 and 22: that is no good.
+                                    You are a possible victim of DDOS attacks, so be careful with the ICMP protocol.<p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Help Modal -->
+            <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title modal-text" id="helpModalLabel">Help</h5>
+                        </div>
+                        <div class="modal-body modal-text">
+                            <div>
+                                <img class="d-block mx-auto mb-4" src="/img/question.jpg" alt="" width="72" height="57">
+                                <div class="lead modal-text">
+                                    <pre>Firewall SPI: it is a system that helps you to block attacks</pre>
+                                    <pre>WPS (Wi-Fi Protected Setup): it is the possibility to connect quickly a device inserting a simple PIN</pre>
+                                    <pre>DDOS (Distributed Denial of Service) Protection: it is the possibility of the router to block the incoming traffic if this is aggressive</pre>
+                                    <pre>ICMP block: it is the possibility of the router to block the ICMP (Internet Control Message Protocol) packet</pre>
+                                    <pre>Ports block: it is the possibility of the router to block specific ports of the network and, in this way, block specific protocols</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Results Modal -->
+            <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title modal-text" id="resultsModalLabel">Result</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <p class="lead modal-text" id="resultsText"> <p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button  type="button" class="btn btn-warning" data-bs-dismiss="modal"><a onClick="window.location.reload()">Try again</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- map modal -->
+            <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title modal-text" id="exitModalLabel">Go back to the Mini Games Choice?</h5>
+                        </div>
+                        <div class="modal-body modal-text">
+                            <div>
+                                <pre>Are you sure to exit from the game?</pre>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                                <button type="button" class="btn btn-danger" onclick="window.location.href='../maps.html'">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- levels modal -->
+            <div class="modal fade" id="levelsModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title modal-text" id="levelsModalLabel">Go back to the Levels Choice?</h5>
+                        </div>
+                        <div class="modal-body modal-text">
+                            <div>
+                                <pre>Are you sure to exit from the game?</pre>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                                <button type="button" class="btn btn-danger" onclick="window.location.href='../router.html'">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Home modal -->
+            <div class="modal fade" id="homeModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title modal-text" id="homeModalLabel">Go Back to the Home?</h5>
+                        </div>
+                        <div class="modal-body modal-text">
+                            <div>
+                                <pre>Are you sure to exit from the game?</pre>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                                <button type="button" class="btn btn-danger" onclick="window.location.href='../index.html'">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="fixed-bottom footer mt-auto text-white-50">
+        <p>A serious game developed by Francesco Greco and Francesco Plantone <a href="https://github.com/Holtalca/Serius_Game" class="text-white">GIT</a></p>
+    </footer>
+    <script>
+        let myModal = new bootstrap.Modal(document.getElementById('startModal'), [])
+        myModal.show()
+        class Device {
+            constructor(id, name, mac, correct) {
+                this.id = id;
+                this.name = name;
+                this.mac = mac;
+                this.isBlacklisted= false;
+                this.correct = correct;
+            }
+
+            getId () {
+                return this.id;
+            }
+            getName () {
+                return this.name;
+            }
+            getMac () {
+                return this.mac;
+            }
+            getIsBlacklisted() {
+                return this.isBlacklisted;
+            }
+            getCorrect () {
+                return this.correct;
+            }
+
+            setIsBlacklisted(bool) {
+                this.isBlacklisted = bool;
+            }
+
+            constructTableRow (){
+                let button = this.isBlacklisted ?  `<button type="button" class="btn btn-danger" onclick="addToWhiteList(${this.id})">Remove from Blacklist</button>` :
+                    `<button type="button" class="btn btn-warning" onclick="addToBlackList(${this.id})">Add to Blacklist</button>`
+                return `
+                <tr id="device_${this.id}">
+                    <th scope="row">${this.id}</th>
+                    <td>${this.name}</td>
+                    <td>${this.mac}</td>
+                    <td>${button}</td>
+                </tr>
+            `
+            }
+        }
+        var whitelist_table = $('#devices_table')
+        var blacklist_table = $('#blacklist_table')
+
+        var devices = {
+            1 :  new Device(1, "Mark", "A4:56:A2:FF:22", "white"),
+            2 :  new Device(2, "Jacob", "A3:50:B2:EE:32", "white"),
+            3 :  new Device(3, "Rasph@ckt00ls", "E2:51:B2:EE:12", "black"),
+            4 :  new Device(4, "Mum", "A3:55:B2:EF:32", "white"),
+            5 :  new Device(5, "Malicious_turtlenet", "11:00:02:EE:32", "black"),
+            6 :  new Device(6, "smart_bulb", "13:50:B2:AE:32", "white"),
+            7 :  new Device(7, "smart_door_bell", "13:50:B2:AE:32", "white"),
+            8 :  new Device(8, "smartTV", "09:45:B2:AE:32", "white"),
+        }
+
+        function addToWhiteList (device_id) {
+            devices[device_id].setIsBlacklisted(false)
+            let deviceObject = $("#device_"+device_id)
+            deviceObject.remove();
+            whitelist_table.append(devices[device_id].constructTableRow())
+        }
+
+        function addToBlackList (device_id) {
+            devices[device_id].setIsBlacklisted(true)
+            let deviceObject = $("#device_"+device_id)
+            deviceObject.remove();
+            blacklist_table.append(devices[device_id].constructTableRow())
+        }
+
+        setTimeout( () => {
+            //console.log (devices)
+            for (const [_, device] of Object.entries(devices)) {
+                whitelist_table.append(device.constructTableRow())
+            }
+        }, 100);
+
+        function SoundClick(){
+            var audio  = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/click.mp3');
+            var audio2 = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/clickUp.mp3')
+            audio2.load();
+            audio2.play();
+            audio.load();
+            audio.play();
+        }
+        function Soundresults(victory){
+            let audio  = victory ? new Audio('/sounds/rullo.mp3') : new Audio ('/sounds/lost_bebeps.wav');
+            audio.load();
+            audio.play();
+        }
+        function calculateResults () {
+            SoundClick();
+
+            let score = 0
+            let black=0
+            let firewall=[" ",0];
+            let wps =[" ",0];
+            let ddos =[" ",0];
+            let icmp=[" ",0];
+            let ports_score = 0
+            let wrong_blocked_ports = []
+            //ports
+            $("input[name='ports']").each(function (index, obj) {
+                if (obj.checked) {
+                    if (obj.value === "21" || obj.value === "22")  { //correct
+                        score +=1;
+                        ports_score += 1;
+                    } else {
+                        score -= 0.5;
+                        ports_score -= 0.5;
+                        wrong_blocked_ports.push (obj.value)
+                    }
+                }
+            })
+
+            if ($('#firewall').is(':checked')){
+                score +=1;
+                firewall[1]=1;
+                firewall[0]= "Stateful Packet Inspection is active";
+                console.log("firewall ok")
+            }else{
+                firewall[1]=1;
+                firewall[0] = "Stateful Packet Inspection is not active";
+            }
+
+            if ($('#wps').is(':checked')){
+                score +=0.5
+                wps[1] = 1
+                wps[0] = "WPS attacks are blocked"
+                console.log("wps nascosto")
+            }else{
+                wps[1]=0;
+                wps[0] = "WPS attacks are not blocked";
+            }
+
+            if ($('#ddos').is(':checked')){
+                score +=1;
+                ddos[1]=1;
+                ddos[0] = "DDOS attacks are prevented";
+                console.log("ddos attivo")
+            }else{
+                ddos[1]=0;
+                ddos[0]= "DDOS attacks are not prevented";
+            }
+
+            if ($('#icmp').is(':checked')){
+                score +=1;
+                icmp[1] =1;
+                icmp[0] = "ICMP scans are blocked";
+                console.log("icmp attivo")
+            }else{
+                icmp[1] =0;
+                icmp[0] ="ICMP scans are not blocked";
+            }
+
+            for (const [_, device] of Object.entries(devices)) {
+                if (device.getIsBlacklisted()) {
+                    if (device.getCorrect() === "black") {
+                        score +=1;
+                        black += 1;
+                    } else {
+                        score -=0.5;
+                        black -=0.5;
+                    }
+                }
+            }
+
+            let txt_color;
+            let grade;
+            if (score >= 8) {
+                //A
+                grade = "A";
+                txt_color = "darkgreen";
+
+            } else if (score >= 7) {
+                //B+
+                txt_color = "green";
+                grade = "B+";
+
+            }else if (score >= 6) {
+                //B
+                txt_color = "green";
+                grade = "B";
+
+            } else if (score >= 5) {
+                //C
+                txt_color = "goldenrod";
+                grade = "C";
+
+            } else if (score >= 4) {
+                //D
+                txt_color = "orange"
+                grade = "D";
+
+            } else if (score >= 2) {
+                //D-
+                txt_color = "darkorange"
+                grade = "D-";
+            } else {
+                //F
+                txt_color = "darkred"
+                grade = "F";
+
+            }
+            let wrong_ports_text = wrong_blocked_ports.length > 0 ? `<br>(You blocked some wrong ports)` : ""
+            Soundresults(score >= 6);
+
+            $("#resultsText").html(`
+            <div>
+               <pre><h3><br>Your score is <span style="color:${txt_color}">${grade}</span></br><h3></pre>
+               <hr>
+               <pre>Firewall SPI: <span style="color:${firewall[1]>=1 ? "darkgreen" : (firewall[1]<1 ? "goldenrod":"darkred")}">${firewall[1]}/1</span>
+               <br><span class="">(${firewall[0]})</span></br></pre>
+
+               <pre>WPS: <span style="color:${wps[1]>=1 ? "darkgreen" : "darkred"}">${wps[1]}/1</span>
+               <br>(${wps[0]})</br></pre>
+
+               <pre>DDOS: <span style="color:${ddos[1]>=1 ? "darkgreen" : "darkred"}">${ddos[1]}/1</span>
+               <br>(${ddos[0]})</br></pre>
+
+               <pre>ICMP: <span style="color:${icmp[1]>=1 ? "darkgreen" : "darkred"}">${icmp[1]}/1</span>
+               <br>(${icmp[0]})</br></pre>
+
+               <pre>Blocked Ports: <span style="color:${ports_score>=1 ? "darkgreen" :  "darkred"}">${ports_score}/2</span>
+               ${wrong_ports_text}</pre>
+
+               <pre>Blacklist: <span style="color:${black>=2 ? "darkgreen" : (black === 1 ? "goldenrod":"darkred")}">${black}/2</span>
+               </pre>
+            </div>
+            `)
+        }
+
+
+    </script>
+</div>
+</body>
+
+</html>
